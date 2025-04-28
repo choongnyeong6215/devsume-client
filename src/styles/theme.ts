@@ -18,7 +18,7 @@ export const lightTheme: Theme = {
     outlined: {
       color: "#000000",
       background: "#FFFFFF",
-      border: "1px solid #F8F9FA",
+      border: "1px solid #CED4D9",
       padding: "0 1.5rem",
     },
   },
