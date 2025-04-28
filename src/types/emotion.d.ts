@@ -28,6 +28,6 @@ declare module "@emotion/react" {
       };
     };
     fontSize: Record<FontSize, string>;
-    radius: Record<Radius, string>;
+    borderRadius: Record<Radius, string>;
   }
 }
