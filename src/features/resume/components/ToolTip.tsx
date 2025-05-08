@@ -1,6 +1,6 @@
 import { TooltipSchmea } from "@/types/theme";
 import styled from "@emotion/styled";
-import { FaAsterisk } from "react-icons/fa";
+import { Asterisk } from "lucide-react";
 
 interface ToolTipProps {
   message: string;
@@ -10,7 +10,7 @@ interface ToolTipProps {
 const ToolTip = ({ message, schema }: ToolTipProps) => {
   return (
     <StyledToolTip schema={schema}>
-      {schema === "essential" && <FaAsterisk />}
+      {schema === "essential" && <Asterisk size={12} />}
       <span>{message}</span>
     </StyledToolTip>
   );
@@ -27,10 +27,6 @@ const StyledToolTip = styled.div<{ schema: TooltipSchmea }>`
     display: "flex",
     alignItems: "center",
     gap: "0.25rem",
-
-    "& svg": {
-      fontSize: "0.5rem",
-    },
   })}
 `;
 
