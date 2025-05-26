@@ -18,6 +18,7 @@ const Header = () => {
           <a>임시 목록</a>
         </div>
       </nav>
+      <div className="border-line" />
     </StyledHeader>
   );
 };
@@ -32,7 +33,7 @@ const StyledHeader = styled.header`
   }
 
   .logo {
-    padding: 0 5rem;
+    padding-right: 5rem;
 
     svg {
       width: 2rem;
@@ -44,7 +45,6 @@ const StyledHeader = styled.header`
     display: flex;
     align-items: center;
     gap: 2rem;
-    padding: 0;
   }
 
   a {
@@ -56,6 +56,12 @@ const StyledHeader = styled.header`
     &:hover {
       color: #3182f6;
     }
+  }
+
+  .border-line {
+    background-color: #f1f4f6;
+    width: 100%;
+    height: 2px;
   }
 `;
 
