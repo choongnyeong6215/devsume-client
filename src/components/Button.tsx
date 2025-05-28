@@ -9,9 +9,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-const Button = ({ schema, radiusSize, children, ...rest }: ButtonProps) => {
+const Button = ({ schema, radiusSize, children, ...props }: ButtonProps) => {
   return (
-    <StyledButton schema={schema} radiusSize={radiusSize} {...rest}>
+    <StyledButton schema={schema} radiusSize={radiusSize} {...props}>
       {children}
     </StyledButton>
   );
