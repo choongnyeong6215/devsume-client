@@ -10,7 +10,7 @@ const Description = () => {
 };
 
 const StyledDescription = styled.div`
-  color: "#858e96";
+  color: #858e96;
 `;
 
 export default Description;
