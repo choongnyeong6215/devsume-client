@@ -30,7 +30,7 @@ const Wrapper = styled.section`
     flexDirection: "column",
     gap: "0.25rem",
     padding: "2rem",
-    margin: "0 auto",
+    marginBottom: "2rem",
     border: `1px solid ${theme.color.border}`,
     borderRadius: theme.borderRadius.large,
   })}
