@@ -24,12 +24,15 @@ const Root = ({
 
 const Wrapper = styled.section`
   ${({ theme }) => ({
+    width: "700px",
+    minHeight: "150px",
     display: "flex",
     flexDirection: "column",
     gap: "0.25rem",
+    padding: "2rem",
+    margin: "0 auto",
     border: `1px solid ${theme.color.border}`,
     borderRadius: theme.borderRadius.large,
-    padding: "2rem",
   })}
 
   .div {
