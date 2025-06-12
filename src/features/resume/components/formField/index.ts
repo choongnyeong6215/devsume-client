@@ -6,6 +6,8 @@ import ErrorMessage from "@/features/resume/components/formField/ErrorMessage";
 import TextArea from "@/features/resume/components/formField/TextArea";
 import ProfileUplodaer from "@/features/resume/components/upload/ProfileUploader";
 import PortfolioUploader from "@/features/resume/components/upload/PortfolioUploader";
+import MarkdownEditor from "@/features/resume/components/formField/MarkdownEditor";
+import SelectInput from "@/features/resume/components/formField/SelectInput";
 
 export const FormField = Object.assign(Root, {
   Label,
@@ -15,4 +17,6 @@ export const FormField = Object.assign(Root, {
   TextArea,
   ProfileUplodaer,
   PortfolioUploader,
+  MarkdownEditor,
+  SelectInput,
 });
