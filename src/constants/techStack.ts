@@ -1,9 +1,7 @@
-const LANGUAGE = ["JAVASCRIPT", "TYPESCRIPT", "JAVA", "C#", "C++", "Python"];
+const LANGUAGE = ["JavaScript", "TypeScript", "Java", "C#", "C++", "Python"];
 
 const FRONTEND = [
   "HTML/CSS",
-  "JavaScript",
-  "TypeScript",
   "React",
   "React Native",
   "Next.js",
@@ -34,7 +32,7 @@ const INFRA = ["Docker", "Kubernetes"];
 
 const EXTRA = ["Github"];
 
-export const TECHSTACK = [
+export const TECH_STACK = [
   ...LANGUAGE,
   ...FRONTEND,
   ...BACKEND,
