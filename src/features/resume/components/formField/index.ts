@@ -8,6 +8,7 @@ import ProfileUplodaer from "@/features/resume/components/upload/ProfileUploader
 import PortfolioUploader from "@/features/resume/components/upload/PortfolioUploader";
 import MarkdownEditor from "@/features/resume/components/formField/MarkdownEditor";
 import SelectInput from "@/features/resume/components/formField/SelectInput";
+import SearchInput from "@/features/resume/components/formField/SearchInput";
 
 export const FormField = Object.assign(Root, {
   Label,
@@ -19,4 +20,5 @@ export const FormField = Object.assign(Root, {
   PortfolioUploader,
   MarkdownEditor,
   SelectInput,
+  SearchInput,
 });
