@@ -1,16 +1,14 @@
-import { ReactNode } from "react";
 import styled from "@emotion/styled";
 import Header from "@/components/Header";
+import { Outlet } from "react-router";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = () => {
   return (
     <Wrapper>
       <Header />
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
     </Wrapper>
   );
 };
