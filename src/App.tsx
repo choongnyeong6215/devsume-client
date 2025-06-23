@@ -1,13 +1,8 @@
-import GlobalStyle from "@/styles/global";
-import { lightTheme } from "@/styles/theme";
-import { Global, ThemeProvider } from "@emotion/react";
+import { RouterProvider } from "react-router";
+import { router } from "./routes/index";
 
 const App = () => {
-  return (
-    <ThemeProvider theme={lightTheme}>
-      <Global styles={GlobalStyle} />
-    </ThemeProvider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
