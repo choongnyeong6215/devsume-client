@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { FileUser } from "lucide-react";
+import { Link } from "react-router";
 
 const Header = () => {
   {
@@ -9,13 +10,13 @@ const Header = () => {
     <StyledHeader>
       <nav>
         <div className="logo">
-          <a>
+          <Link to="/">
             <FileUser />
-          </a>
+          </Link>
         </div>
         <div className="menu">
-          <a>작성 목록</a>
-          <a>임시 목록</a>
+          <Link to="/resume/all/completed">작성 목록</Link>
+          <Link to="/resume/all/temporary">임시 목록</Link>
         </div>
       </nav>
       <div className="border-line" />
