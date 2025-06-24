@@ -29,6 +29,7 @@ const StyledButton = styled.button<{
     borderRadius: theme.borderRadius[radiusSize],
     height: "2rem",
     cursor: "pointer",
+    width: "100%",
 
     "&:hover": {
       backgroundColor: darken(0.05, theme.button[schema].background),
