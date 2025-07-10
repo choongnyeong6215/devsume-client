@@ -4,16 +4,14 @@ import { useFormField } from "@/hooks/useFormField";
 import { useFormContext } from "react-hook-form";
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
-  const { id, errorMessage } = useFormField();
-  const { register } = useFormContext();
+  const { id } = useFormField();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <StyledInput
-      id={id}
-      hasError={!!errorMessage}
-      {...register(id)}
-      {...props}
-    />
+    <StyledInput id={id} hasError={!!errors[id]} {...register(id)} {...props} />
   );
 };
 
