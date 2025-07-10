@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const resumeSchema = z.object({
   // 필수
-  profileImage: z.instanceof(File, { message: "프로필 사진은 필수입니다." }),
+  profileImage: z.string().nonempty("프로필 사진은 필수입니다."),
   name: z.string().nonempty("이름은 필수입니다."),
   position: z.string().nonempty("직군은 필수입니다."),
   email: z
