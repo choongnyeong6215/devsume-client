@@ -4,16 +4,25 @@ import { useFormField } from "@/hooks/useFormField";
 import { Trash2, Upload, UserPen } from "lucide-react";
 import Label from "@/features/resume/components/formField/Label";
 import { darken } from "polished";
+import { useFormContext } from "react-hook-form";
+
+/**
+ *  ProfileUploader 사용하지 않는 페이지에서 setValue 에러 밸생 문제 해결하기
+ */
 
 const ProfileUploader = () => {
   const { id } = useFormField();
+  const { register, setValue } = useFormContext();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
   const handleUploadProfile = (e: ChangeEvent<HTMLInputElement>) => {
     const uploadedFile = e.target.files?.[0];
 
-    // 미리보기
     if (uploadedFile) {
+      // rhf 등록
+      setValue(id, uploadedFile.name);
+
+      // 미리보기 제공
       const fileReader = new FileReader();
 
       fileReader.onloadend = () => {
@@ -25,12 +34,18 @@ const ProfileUploader = () => {
   };
 
   const handleRemoveProfile = () => {
+    setValue(id, null);
     setPreviewImage(null);
   };
 
   return (
     <UploadSection isUpload={!!previewImage}>
-      <input id={id} type="file" onChange={handleUploadProfile} />
+      <input
+        id={id}
+        type="file"
+        {...register(id)}
+        onChange={handleUploadProfile}
+      />
       {previewImage ? (
         <>
           <Overlay className="overlay" />
