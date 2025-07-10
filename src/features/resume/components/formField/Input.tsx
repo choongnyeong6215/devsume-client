@@ -1,11 +1,20 @@
 import { InputHTMLAttributes } from "react";
 import styled from "@emotion/styled";
 import { useFormField } from "@/hooks/useFormField";
+import { useFormContext } from "react-hook-form";
 
 const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
   const { id, errorMessage } = useFormField();
+  const { register } = useFormContext();
 
-  return <StyledInput id={id} hasError={!!errorMessage} {...props} />;
+  return (
+    <StyledInput
+      id={id}
+      hasError={!!errorMessage}
+      {...register(id)}
+      {...props}
+    />
+  );
 };
 
 const StyledInput = styled.input<{ hasError: boolean }>`
