@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { AuthFormFields, authSchema } from "@/features/auth/schema/authSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { SubmitHandler, useFormContext } from "react-hook-form";
+import { AuthFormFields } from "@/features/auth/schema/authSchema";
 import { FormField } from "@/features/resume/components/formField";
 import Button from "@/components/Button";
 import { useJoin } from "@/features/auth/hooks/useJoin";
@@ -11,16 +10,10 @@ const JoinForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     setError,
     reset,
-  } = useForm<AuthFormFields>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    resolver: zodResolver(authSchema),
-  });
+  } = useFormContext();
   const { mutateAsync } = useJoin();
 
   const onSubmit: SubmitHandler<AuthFormFields> = async (data) => {
@@ -41,25 +34,19 @@ const JoinForm = () => {
     <JoinFormController>
       <h1>Devsume</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormField
-          id="email"
-          errorMessage={errors.email && errors.email.message}
-        >
+        <FormField id="email">
           <FormField.Label>이메일</FormField.Label>
           <FormField.Input {...register("email")} />
           <FormField.ErrorMessage />
         </FormField>
-        <FormField
-          id="password"
-          errorMessage={errors.password && errors.password.message}
-        >
+        <FormField id="password">
           <FormField.Label>비밀번호</FormField.Label>
           <FormField.Input {...register("password")} />
           <FormField.ErrorMessage />
           <div className="border-line" />
         </FormField>
         {errors.root && <p style={{ color: "red" }}>{errors.root.message}</p>}
-        <Button schema="filled" radiusSize="medium" disabled={isSubmitting}>
+        <Button schema="filled" radiusSize="medium">
           회원가입
         </Button>
         {/* 카카오 로그인 */}
