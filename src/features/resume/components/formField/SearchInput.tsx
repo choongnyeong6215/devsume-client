@@ -2,24 +2,35 @@ import { TECH_STACK } from "@/constants/techStack";
 import { ChangeEvent, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { X } from "lucide-react";
+import { useController } from "react-hook-form";
 
 const SearchInput = () => {
   const [searchWord, setSearchWord] = useState<string>("");
-  const [selectedStack, setSelectedStack] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const {
+    field: { value = [], onChange },
+  } = useController({
+    name: "techStack",
+    defaultValue: [],
+  });
+
+  const selectedStack = value;
 
   const handleChangeSearchWorld = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchWord(e.target.value);
   };
 
   const handleRemoveStack = (stack: string) => {
-    setSelectedStack((prev) => prev.filter((v) => v !== stack));
+    const newSelectedStack = selectedStack.filter((v: string) => v !== stack);
+    onChange(newSelectedStack);
   };
 
   const handleAddStack = (e: React.MouseEvent, stack: string) => {
     e.preventDefault();
-    setSelectedStack((prev) => [...prev, stack]);
+
+    onChange([...selectedStack, stack]);
     inputRef.current?.focus();
   };
 
@@ -48,7 +59,7 @@ const SearchInput = () => {
     <InputContainer onClick={() => inputRef.current?.focus()}>
       {/* 선택 기술스택 */}
       <Wrapper>
-        {selectedStack.map((stack) => (
+        {selectedStack.map((stack: string) => (
           <SelectedStackTag key={stack}>
             {stack}
             <X
