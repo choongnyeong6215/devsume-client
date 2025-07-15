@@ -1,25 +1,105 @@
 import styled from "@emotion/styled";
-import { Trash2 } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
+import { Controller, useFieldArray, useFormContext } from "react-hook-form";
+import PdfUploadButton from "./PdfUploadButton";
 
-interface PortfolioUploaderProps {
-  fileName: string;
-  onRemovePdf: () => void;
-}
+const PortfolioUploader = () => {
+  const { control } = useFormContext();
 
-const PortfolioUploader = ({
-  fileName,
-  onRemovePdf,
-}: PortfolioUploaderProps) => {
+  const {
+    fields: urlFields,
+    append: appendUrl,
+    remove: removeUrl,
+  } = useFieldArray({
+    control,
+    name: "urls",
+  });
+
+  const {
+    fields: pdfFields,
+    append: appendPdf,
+    remove: removePdf,
+  } = useFieldArray({
+    control,
+    name: "pdfs",
+  });
+
+  // url 입력 섹션 추가
+  const handleAddUrl = () => {
+    appendUrl({ name: "", address: "" });
+  };
+
+  const handleAddPdf = (file) => {
+    appendPdf({
+      name: file.name,
+      uploadedAt: file.lastModifiedDate,
+    });
+  };
+
   return (
-    <StyledPortfolioUploader>
-      <div className="file-name">
-        <p>파일명</p>
-        <p>{fileName}</p>
-      </div>
-      <Trash2 onClick={onRemovePdf} />
-    </StyledPortfolioUploader>
+    <PortfolioUploaderContainer>
+      <TypeHeader>
+        <h3>URL</h3>
+        <Plus onClick={handleAddUrl} />
+      </TypeHeader>
+
+      {/* Url List */}
+      {urlFields.map((field, idx) => (
+        <StyledPortfolioUploader key={field.id}>
+          <Controller
+            name={`urls.${idx}.link`}
+            control={control}
+            render={({ field }) => (
+              <div className="url-section">
+                <label style={{ width: "2rem" }} htmlFor={`${idx}Address`}>
+                  주소
+                </label>
+                <InputField
+                  {...field}
+                  id={`${idx}Address`}
+                  placeholder="https://"
+                />
+              </div>
+            )}
+          />
+          <Trash2 onClick={() => removeUrl(idx)} />
+        </StyledPortfolioUploader>
+      ))}
+
+      <div className="border-line" />
+
+      <TypeHeader>
+        <h3>PDF</h3>
+        <PdfUploadButton onAddPdf={handleAddPdf} />
+      </TypeHeader>
+
+      {/* Pdf List */}
+      {pdfFields.map((field, index) => (
+        <StyledPortfolioUploader key={field.id}>
+          <div className="pdf-section">
+            <div>
+              <label>파일명</label>
+              <p>{field.name}</p>
+            </div>
+            <div>
+              <label>등록일</label>
+              <p>{new Date(field.uploadedAt).toLocaleString()}</p>
+            </div>
+          </div>
+          <Trash2 onClick={() => removePdf(index)} />
+        </StyledPortfolioUploader>
+      ))}
+    </PortfolioUploaderContainer>
   );
 };
+
+const PortfolioUploaderContainer = styled.div`
+  .border-line {
+    background-color: #f1f4f6;
+    width: 100%;
+    height: 5px;
+  }
+`;
 
 const StyledPortfolioUploader = styled.div`
   ${({ theme }) => ({
@@ -31,16 +111,56 @@ const StyledPortfolioUploader = styled.div`
     padding: "2rem 1.5rem",
     border: `1px solid ${theme.color.border}`,
     borderRadius: theme.borderRadius.medium,
+    marginBottom: "1rem",
   })}
 
-  .file-name {
+  .url-section {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+  }
 
-    p:first-of-type {
-      font-weight: bold;
+  .pdf-section {
+    display: flex;
+    flex: 1;
+    gap: 2rem;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      label {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      p {
+        color: ${({ theme }) => theme.color.border};
+        font-weight: 600;
+      }
     }
   }
+`;
+
+const InputField = styled.input`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0.25rem;
+  font-size: inherit;
+  width: 60%;
+
+  &::placeholder {
+    color: ${({ theme }) => theme.color.border};
+  }
+`;
+
+const TypeHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 0;
 
   svg {
     cursor: pointer;
