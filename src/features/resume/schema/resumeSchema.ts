@@ -13,6 +13,9 @@ export const resumeSchema = z.object({
     .string()
     .nonempty("한줄 소개는 필수입니다.")
     .max(300, "한줄 소개는 최대 300자 까지 지원합니다."),
+
+  // 선택 사항
+  techStack: z.array(z.string()).optional(),
 });
 
 export type ResumeFormFields = z.infer<typeof resumeSchema>;
