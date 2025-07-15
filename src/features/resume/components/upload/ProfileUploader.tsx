@@ -6,10 +6,6 @@ import Label from "@/features/resume/components/formField/Label";
 import { darken } from "polished";
 import { useFormContext } from "react-hook-form";
 
-/**
- *  ProfileUploader 사용하지 않는 페이지에서 setValue 에러 밸생 문제 해결하기
- */
-
 const ProfileUploader = () => {
   const { id } = useFormField();
   const { register, setValue } = useFormContext();
