@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Plus, Trash2 } from "lucide-react";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import PdfUploadButton from "./PdfUploadButton";
+import Input from "../formField/Input";
 
 const PortfolioUploader = () => {
   const { control } = useFormContext();
@@ -12,7 +13,7 @@ const PortfolioUploader = () => {
     remove: removeUrl,
   } = useFieldArray({
     control,
-    name: "urls",
+    name: "portfolio.urls",
   });
 
   const {
@@ -21,12 +22,12 @@ const PortfolioUploader = () => {
     remove: removePdf,
   } = useFieldArray({
     control,
-    name: "pdfs",
+    name: "portfolio.pdfs",
   });
 
   // url 입력 섹션 추가
   const handleAddUrl = () => {
-    appendUrl({ name: "", address: "" });
+    appendUrl({ address: "" });
   };
 
   const handleAddPdf = (file) => {
@@ -47,18 +48,14 @@ const PortfolioUploader = () => {
       {urlFields.map((field, idx) => (
         <StyledPortfolioUploader key={field.id}>
           <Controller
-            name={`urls.${idx}.link`}
+            name={`portfolio.urls.${idx}.address`}
             control={control}
             render={({ field }) => (
               <div className="url-section">
                 <label style={{ width: "2rem" }} htmlFor={`${idx}Address`}>
                   주소
                 </label>
-                <InputField
-                  {...field}
-                  id={`${idx}Address`}
-                  placeholder="https://"
-                />
+                <Input {...field} id={`${idx}Address`} placeholder="https://" />
               </div>
             )}
           />
@@ -141,19 +138,6 @@ const StyledPortfolioUploader = styled.div`
         font-weight: 600;
       }
     }
-  }
-`;
-
-const InputField = styled.input`
-  background-color: transparent;
-  border: none;
-  outline: none;
-  padding: 0.25rem;
-  font-size: inherit;
-  width: 60%;
-
-  &::placeholder {
-    color: ${({ theme }) => theme.color.border};
   }
 `;
 
