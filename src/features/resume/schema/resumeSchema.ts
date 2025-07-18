@@ -16,6 +16,21 @@ export const resumeSchema = z.object({
 
   // 선택 사항
   techStack: z.array(z.string()).optional(),
+  portfolio: z
+    .object({
+      urls: z.array(
+        z.object({
+          address: z.string().url("올바른 주소를 입력해주세요."),
+        })
+      ),
+      pdfs: z.array(
+        z.object({
+          name: z.string(),
+          uploadedAt: z.date(),
+        })
+      ),
+    })
+    .optional(),
 });
 
 export type ResumeFormFields = z.infer<typeof resumeSchema>;
