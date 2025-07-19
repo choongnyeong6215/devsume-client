@@ -9,6 +9,7 @@ import PortfolioUploader from "@/features/resume/components/upload/PortfolioUplo
 import MarkdownEditor from "@/features/resume/components/formField/MarkdownEditor";
 import SelectInput from "@/features/resume/components/formField/SelectInput";
 import SearchInput from "@/features/resume/components/formField/SearchInput";
+import MonthRangePicker from "@/features/resume/components/formField/MonthRangePicker";
 
 export const FormField = Object.assign(Root, {
   Label,
@@ -21,4 +22,5 @@ export const FormField = Object.assign(Root, {
   MarkdownEditor,
   SelectInput,
   SearchInput,
+  MonthRangePicker,
 });
