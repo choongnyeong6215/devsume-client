@@ -31,6 +31,14 @@ export const resumeSchema = z.object({
       ),
     })
     .optional(),
+  project: z.array(
+    z.object({
+      name: z.string(),
+      organization: z.string(),
+      duration: z.date(),
+      detail: z.string(),
+    })
+  ),
 });
 
 export type ResumeFormFields = z.infer<typeof resumeSchema>;
