@@ -1,7 +1,7 @@
 import { Card } from "@/features/resume/components/Card/";
 import { FormField } from "@/features/resume/components/formField";
 
-const TechStack = () => {
+const TechStackCard = () => {
   return (
     <Card title="기술 스택" isEssential={false} isMultiple={false}>
       <Card.Header />
@@ -18,4 +18,4 @@ const TechStack = () => {
   );
 };
 
-export default TechStack;
+export default TechStackCard;
