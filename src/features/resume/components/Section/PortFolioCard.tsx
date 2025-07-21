@@ -1,7 +1,7 @@
-import { Card } from "@/features/resume/components/Card/";
+import { Card } from "@/features/resume/components/Card";
 import { FormField } from "@/features/resume/components/formField";
 
-const PortFolio = () => {
+const PortfolioCard = () => {
   return (
     <Card title="포트폴리오" isEssential={false} isMultiple={false}>
       <Card.Header />
@@ -15,4 +15,4 @@ const PortFolio = () => {
   );
 };
 
-export default PortFolio;
+export default PortfolioCard;
