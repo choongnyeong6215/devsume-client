@@ -1,6 +1,6 @@
 import { Card } from "@/features/resume/components/Card/";
 import { FormField } from "@/features/resume/components/formField";
-import FormFlexProvider from "../formField/FormFlexProvider";
+import FormFlexProvider from "@/features/resume/components/formField/FormFlexProvider";
 
 const EssentialSection = () => {
   return (
