@@ -2,14 +2,19 @@ import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useMemo } from "react";
 import styled from "@emotion/styled";
-import Link from "@tiptap/extension-link";
+import CodeBlock from "@tiptap/extension-code-block";
+import { darken } from "polished";
 
 const MarkDownEditor = () => {
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      Link.configure({
-        openOnClick: false,
+      StarterKit.configure({
+        codeBlock: false,
+      }),
+      CodeBlock.configure({
+        HTMLAttributes: {
+          class: "code-block",
+        },
       }),
     ],
     content: "",
@@ -39,6 +44,27 @@ const EditorContainer = styled.div`
       cursor: "text",
       fontSize: "16px",
       lineHeight: "1.5",
+
+      pre: {
+        backgroundColor: darken(0.2, theme.color.background),
+        border: "1px solid #e1e4e8",
+        borderRadius: "6px",
+        padding: "16px",
+        margin: "16px 0",
+        overflow: "auto",
+        fontSize: "14px",
+        lineHeight: "1.45",
+        fontFamily: "'SFMono-Regular', 'Monaco', monospace",
+        color: "#24292e",
+
+        code: {
+          backgroundColor: "transparent",
+          border: "none",
+          padding: "0",
+          fontSize: "inherit",
+          color: "inherit",
+        },
+      },
 
       // 노션 스타일 헤딩
       h1: {
