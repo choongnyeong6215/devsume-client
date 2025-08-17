@@ -4,6 +4,12 @@ import { useMemo } from "react";
 import styled from "@emotion/styled";
 import CodeBlock from "@tiptap/extension-code-block";
 import { darken } from "polished";
+import Link from "@tiptap/extension-link";
+import {
+  Toolbar,
+  ToolbarGroup,
+} from "../../../../../@/components/tiptap-ui-primitive/toolbar/toolbar";
+import Button from "@/components/Button";
 
 const MarkDownEditor = () => {
   const editor = useEditor({
@@ -16,7 +22,13 @@ const MarkDownEditor = () => {
           class: "code-block",
         },
       }),
+      Link.configure({
+        HTMLAttributes: {
+          class: "editor-link",
+        },
+      }),
     ],
+
     content: "",
   });
 
@@ -25,6 +37,50 @@ const MarkDownEditor = () => {
   return (
     <EditorContext.Provider value={providerValue}>
       <EditorContainer>
+        <Toolbar variant="fixed">
+          <ToolbarGroup>
+            <Button
+              schema={editor?.isActive("bold") ? "filled" : "outlined"}
+              radiusSize="small"
+              onClick={() => editor?.chain().focus().toggleBold().run()}
+            >
+              <strong>Bold</strong>
+            </Button>
+            <Button
+              schema={editor?.isActive("italic") ? "filled" : "outlined"}
+              radiusSize="small"
+              onClick={() => editor?.chain().focus().toggleItalic().run()}
+            >
+              <em>Italic</em>
+            </Button>
+            <Button
+              schema={editor?.isActive("strike") ? "filled" : "outlined"}
+              radiusSize="small"
+              onClick={() => editor?.chain().focus().toggleStrike().run()}
+            >
+              <s>Strike</s>
+            </Button>
+            <Button
+              schema={editor?.isActive("link") ? "filled" : "outlined"}
+              radiusSize="small"
+              onClick={() => {
+                const url = window.prompt("링크 URL을 입력하세요:");
+                if (url) {
+                  editor?.chain().focus().setLink({ href: url }).run();
+                }
+              }}
+            >
+              Link
+            </Button>
+            <Button
+              schema={editor?.isActive("codeBlock") ? "filled" : "outlined"}
+              radiusSize="small"
+              onClick={() => editor?.chain().focus().toggleCodeBlock().run()}
+            >
+              Code
+            </Button>
+          </ToolbarGroup>
+        </Toolbar>
         <EditorContent editor={editor} />
       </EditorContainer>
     </EditorContext.Provider>
@@ -133,13 +189,10 @@ const EditorContainer = styled.div`
 
       // 링크
       a: {
-        color: "#0969da",
-        textDecoration: "underline",
-        textUnderlineOffset: "2px",
-
-        "&:hover": {
-          backgroundColor: "rgba(9, 105, 218, 0.1)",
-        },
+        color: theme.button.filled.background,
+        textDecoration: "none",
+        cursor: "pointer",
+        fontWeight: "bold",
       },
     },
   })},
