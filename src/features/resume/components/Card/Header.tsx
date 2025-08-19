@@ -2,7 +2,11 @@ import { useCard } from "@/hooks/useCard";
 import styled from "@emotion/styled";
 import { Plus } from "lucide-react";
 
-const Header = () => {
+interface CardHeaderProps {
+  onAdd?: () => void;
+}
+
+const Header = ({ onAdd }: CardHeaderProps) => {
   const { title, isEssential, isMultiple, helperMessage } = useCard();
 
   return (
@@ -12,7 +16,7 @@ const Header = () => {
         {isEssential && <p className="essential-message">필수</p>}
         {helperMessage && <p className="helper-message">{helperMessage}</p>}
       </div>
-      {isMultiple && <Plus />}
+      {isMultiple && <Plus onClick={onAdd} />}
     </StyledHeader>
   );
 };
